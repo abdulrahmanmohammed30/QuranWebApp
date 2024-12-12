@@ -1,0 +1,22 @@
+﻿@model ChapterDto
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<div class="chapter-container bg-white p-4 rounded shadow">
+    <div class="chapter-header mb-4 text-center">
+        <h2 class="chapter-title">@Model.Name</h2>
+        <p class="chapter-info">النوع: @(Model.TypeDto?.Text) | عدد الآيات: @Model.TotalVerses</p>
+    </div>
+
+    <ul class="list-group">
+        @foreach (var verse in Model.Verses)
+        {
+            <li class="list-group-item mb-2">
+                <div class="verse-number fw-bold">الآية @verse.VerseId</div>
+                <div class="verse-text">@verse.Text</div>
+            </li>
+        }
+    </ul>
+</div>
