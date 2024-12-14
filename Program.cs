@@ -8,6 +8,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
     .GetConnectionString("constr")));
 builder.Services.AddScoped<ChapterRepository>();
 builder.Services.AddScoped<VerseRepository>();
+builder.Services.AddScoped<JuzRepository>();
 var app = builder.Build();
 app.UseStaticFiles();
 app.MapControllers();

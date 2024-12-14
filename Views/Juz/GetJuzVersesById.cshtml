@@ -1,0 +1,61 @@
+﻿@* @model List<QuranWebApp.Models.VerseDto>
+
+@{
+    ViewData["Title"] = "Quran Verses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="rtl mx-auto my-8 w-8/12">
+    <div class="rounded-lg bg-[f9f9ff] p-6 shadow-md">
+        <div class="mb-4 text-center text-2xl font-bold">بسم الله الرحمن الرحيم</div>
+
+        @foreach (var verse in Model)
+        {
+            <span class="inline-block" style="display:inline-block;margin-bottom:0.3rem;">
+                <span class="mr-4 text-xl font-bold text-gray-700">(@verse.VerseId)</span>
+                <span class="flex-1 text-right text-xl text-gray-800">@verse.Text</span>
+            </span>
+        }
+    </div>
+</div> *@
+
+@model JuzVersesViewModel
+
+
+@{
+    ViewData["Title"] = "Quran Verses";
+}
+
+<div class="min-h-screen bg-gray-100 py-10">
+    <div class="mx-auto w-8/12 px-4 lg:px-8">
+        <!-- Header Section -->
+        <div class="mb-8 rounded-lg bg-white p-6 shadow-lg">
+            <h1 class="mb-4 text-center text-2xl font-bold text-green-600 lg:text-3xl">
+                الجزء: @Model.Juz.Id
+            </h1>
+            <p class="text-center text-gray-700">
+                عدد الايات: <span class="font-semibold">@Model.Juz.VersesCount</span>
+            </p>
+        </div>
+
+        <!-- Bismillah Section -->
+        <div class="mb-6 text-center font-serif text-2xl text-gray-800 lg:text-3xl">
+            بسم الله الرحمن الرحيم
+        </div>
+
+        <!-- Chapter Content -->
+        <div class="rounded-lg bg-white p-6 shadow-lg">
+            <div class="leading-6 text-right font-serif text-2xl text-gray-800 lg:text-3xl">
+                @foreach (var verse in Model.Verses)
+                {
+                    <span class="mx-1inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-100 font-bold text-gray-600">
+                        @verse.VerseId
+                    </span>
+                    <span class="group-hover:bg-gray-100 mb-[16px] inline rounded transition-colors">
+                        @verse.Text
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,5 +29,24 @@ namespace QuranWebApp.Utils
             Id = type.Id,
             Text = type.Text,
         };
+
+        public static JuzDto ToJuzDto(Juz juz) => new JuzDto()
+        {
+            Id = juz.Id,
+            FirstVerseId = juz.FirstVerseId,
+            LastVerseId = juz.LastVerseId,
+            VersesCount = juz.VersesCount,
+            VerseMappings = juz.VerseMappings?.Select(ToVerseMappingDto).ToList()
+        };
+
+        public static VerseMappingDto ToVerseMappingDto(VerseMapping verseMapping) => new VerseMappingDto()
+        {
+            Id = verseMapping.Id,
+            JuzId = verseMapping.JuzId,
+            ChapterId = verseMapping.ChapterId,
+            StartVerse = verseMapping.StartVerse,
+            EndVerse = verseMapping.EndVerse,
+            Chapter= verseMapping.Chapter == null?null: ToChapterDto(verseMapping.Chapter) 
+        };
     }
 }
