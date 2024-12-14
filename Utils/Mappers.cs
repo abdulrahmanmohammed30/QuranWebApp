@@ -12,8 +12,8 @@ namespace QuranWebApp.Utils
             TotalVerses = chapter.TotalVerses,
             Transliteration = chapter.Transliteration,
             TypeId = chapter.TypeId,
-            Verses = chapter.Verses.Select(verse => ToVerseDto(verse)).ToList(),
-            TypeDto=ToTypeDto(chapter.Type)
+            Verses = chapter.Verses?.Select(verse => ToVerseDto(verse)).ToList(),
+            Type= chapter.Type != null ?  ToTypeDto(chapter.Type): null
         };
 
         public static VerseDto ToVerseDto(Verse verse) => new VerseDto()

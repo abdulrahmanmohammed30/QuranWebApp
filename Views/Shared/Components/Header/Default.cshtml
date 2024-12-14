@@ -1,0 +1,12 @@
+﻿@model List<ChapterDto>
+
+   <!-- Chapter Navigation Links -->
+<nav class="hidden space-x-4 md:flex">
+    @foreach (var chapter in Model)
+    {
+        <a href="@Url.Action("GetById", "Chapter", new { id = chapter.Id })"
+           class="text-sm hover:text-gray-300">
+            @chapter.Id. @chapter.Name
+        </a>
+    }
+</nav>

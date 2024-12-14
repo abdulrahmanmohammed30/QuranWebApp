@@ -1,0 +1,39 @@
+﻿@model List<ChapterDto>
+
+<!-- Dropdown for Chapters -->
+<div class="relative">
+    <button id="chapterDropdownButton"
+            class="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400">
+        السور
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="chapterDropdownMenu"
+         class="absolute left-0 z-50 mt-2 hidden max-h-60 w-56 overflow-y-auto rounded border border-gray-300 bg-white text-gray-800 shadow-lg">
+        @foreach (var chapter in Model)
+        {
+            <a href="@Url.Action("GetById", "Chapter", new { id = chapter.Id })"
+               class="block px-4 py-2 text-sm hover:bg-gray-200">
+                @chapter.Id. @chapter.Name
+            </a>
+        }
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const button = document.getElementById('chapterDropdownButton');
+        const menu = document.getElementById('chapterDropdownMenu');
+
+        button.addEventListener('click', () => {
+            menu.classList.toggle('hidden'); // Toggle visibility of dropdown
+        });
+
+        // Optional: Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!button.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    });
+</script>

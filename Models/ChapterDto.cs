@@ -10,7 +10,7 @@ namespace QuranWebApp.Models
         public string Name { get; set; }
         public string Transliteration { get; set; }
         public byte TypeId { get; set; } 
-        public virtual TypeDto TypeDto { get; set; }
+        public virtual TypeDto Type { get; set; }
         public int TotalVerses { get; set; }
         public virtual List<VerseDto> Verses { get; set; }
     }

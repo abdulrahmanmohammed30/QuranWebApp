@@ -17,11 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuraDataLayer\QuranDataLayer.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\QuraDataLayer\QuranDataLayer.csproj" />
   </ItemGroup>
 
 </Project>

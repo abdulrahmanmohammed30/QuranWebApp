@@ -1,0 +1,16 @@
+{
+  "name": "quranwebapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "css:build": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify",
+    "watch": "npx tailwindcss -i ./wwwroot/css/site.css -o ./wwwroot/css/styles.css --minify --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  }
+}

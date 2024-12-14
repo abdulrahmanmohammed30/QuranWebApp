@@ -1,0 +1,29 @@
+﻿@model List<QuranWebApp.Models.VerseDto>
+
+@{
+    ViewData["Title"] = "Verses Containing Sajda";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class="mb-6 text-3xl font-bold">الايات التي تحتوي علي سجدة</h1>
+
+    <ul class="space-y-4">
+        @foreach (var verse in Model)
+        {
+            <li class="cursor-pointer rounded-lg bg-white p-6 shadow transition-shadow hover:shadow-lg">
+                <a href="/chapters/@verse.ChapterId" class="block">
+                    <p class="mb-4 text-xl font-semibold text-gray-800">@verse.Text</p>
+                    <div class="text-sm text-gray-500">سورة:(@verse.ChapterId), اية: @verse.VerseId</div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+
+<style>
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
