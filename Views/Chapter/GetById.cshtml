@@ -1,18 +1,42 @@
-﻿@model ChapterDto
+﻿@using QuranWebApp.ViewModels
+@model ChapterViewModel
 
 @{
-    ViewData["Title"] = @Model.Name;
+    ViewData["Title"] = @Model.Chapter.Name;
 }
 
 <div class="min-h-screen bg-gray-100 py-10">
+    <!-- Audio Player Section -->
+    @if (!string.IsNullOrEmpty(Model?.AudoFile?.AudioUrl))
+    {
+        <div class="my-8 rounded-lg bg-white p-6 shadow-lg">
+            <h2 class="mb-4 text-center text-xl font-semibold text-green-600">
+                استمع للسورة
+            </h2>
+
+            <div class="flex justify-center">
+                <audio controls class="w-full max-w-lg rounded-lg shadow-md">
+                    @{
+                        var arr = @Model.AudoFile.AudioUrl.Split("\\");
+                        var path = "/"+ arr[arr.Length - 2] + "/" + arr[arr.Length - 1];
+                        var n = path;
+                    }
+                    <source src="@path" type="audio/mp3">
+                    متصفحك لا يدعم عنصر الصوت.
+                </audio>
+            </div>
+        </div>
+    }
+
+
     <div class="mx-auto w-8/12 px-4 lg:px-8">
         <!-- Header Section -->
         <div class="mb-8 rounded-lg bg-white p-6 shadow-lg">
             <h1 class="mb-4 text-center text-2xl font-bold text-green-600 lg:text-3xl">
-                اسم السورة: @Model.Name | رقم السورة: @Model.Id
+                اسم السورة: @Model.Chapter.Name | رقم السورة: @Model.Chapter.Id
             </h1>
             <p class="text-center text-gray-700">
-                عدد الايات: <span class="font-semibold">@Model.TotalVerses</span> - 
+                عدد الايات: <span class="font-semibold">@Model.Chapter.TotalVerses</span> -
             </p>
         </div>
 
@@ -24,7 +48,7 @@
         <!-- Chapter Content -->
         <div class="rounded-lg bg-white p-6 shadow-lg">
             <div class="leading-6 text-right font-serif text-2xl text-gray-800 lg:text-3xl">
-                @foreach (var verse in Model.Verses)
+                @foreach (var verse in Model.Chapter.Verses)
                 {
                     <span class="mx-1inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-100 font-bold text-gray-600">
                         @verse.VerseId  

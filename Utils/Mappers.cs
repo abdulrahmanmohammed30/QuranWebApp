@@ -48,5 +48,24 @@ namespace QuranWebApp.Utils
             EndVerse = verseMapping.EndVerse,
             Chapter= verseMapping.Chapter == null?null: ToChapterDto(verseMapping.Chapter) 
         };
+
+
+        public static ChapterInfoDto ToChapterInfoDto(ChapterInfo chapterInfo) => new ChapterInfoDto()
+        {
+            Id = chapterInfo.Id,
+            LanguageName = chapterInfo.LanguageName,
+            ShortText = chapterInfo.ShortText,
+            Source = chapterInfo.Source,
+            Text = chapterInfo.Text,
+            Chapter = chapterInfo.Chapter == null ? null : ToChapterDto(chapterInfo.Chapter)
+        };
+
+        public static AudioFileDto ToAudioFileDto(AudioFile audioFile) => new AudioFileDto()
+        {
+            Id=audioFile.Id,
+            AudioUrl = audioFile.AudioUrl,
+            FileSize=audioFile.FileSize,
+            Chapter=audioFile.Chapter == null? null: ToChapterDto(audioFile.Chapter)
+        };
     }
 }

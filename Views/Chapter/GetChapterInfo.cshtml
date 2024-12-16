@@ -1,0 +1,75 @@
+﻿<div id="search-btn" class="search-btn mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md" lang="en" dir="ltr">
+    <!-- Search Bar -->
+    <div class="mb-6">
+        <label for="chapter-search" class="block text-lg font-medium text-gray-700">Search Chapter</label>
+        <div class="mt-2 flex items-center">
+            <input type="text"
+                   id="chapter-search"
+                   placeholder="Enter Chapter ID..."
+                   class="w-full rounded-md border px-4 py-2 text-gray-700 focus:ring-blue-500 focus:border-blue-500">
+            <button id="search-btn"
+                    class="ml-3 rounded-md bg-blue-800 px-4 py-2 text-gray-800 shadow transition hover:bg-blue-900">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <div id="chapter-content" class="chapter-content mt-6"></div>
+
+
+    <script>
+        document.getElementById('search-btn').addEventListener('click', async () => {
+            const chapterId = document.getElementById('chapter-search').value.trim();
+
+            if (!chapterId) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/chapters/info/search/${chapterId}`);
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch chapter information.');
+                }
+
+                const chapterInfo = await response.json();
+                document.getElementById('chapter-content').innerHTML = `
+
+                            <div class="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md" lang="en" dir="ltr">
+                                <h1 class="mb-4 text-3xl font-bold text-gray-800">Chapter Information</h1>
+
+                                <div class="mb-6">
+                                            <p class="mt-2 text-gray-600">Chapter ID: ${chapterInfo.id}</p>
+                                                    <p class="mt-2 text-gray-600">Language: ${chapterInfo.languageName}</p>
+                                </div>
+
+                                <div class="mb-6">
+                                    <h3 class="text-xl font-semibold text-gray-700">Short Description</h3>
+                                                    <p class="mt-2 text-gray-700">${chapterInfo.shortText}</p>
+                                </div>
+
+                                <div class="mb-6">
+                                    <h3 class="text-xl font-semibold text-gray-700">Source</h3>
+                                                    <p class="mt-2 text-gray-700">${chapterInfo.source}</p>
+                                </div>
+
+                                <div class="mb-6">
+                                    <h3 class="text-xl font-semibold text-gray-700">Full Text</h3>
+                                            <p class="mt-2 text-gray-700">${chapterInfo.text}</p>
+                                </div>
+
+                                <div class="mt-6 flex cursor-pointer justify-end">
+                                            <a href="chapters/${chapterInfo.id}"
+                                       class="rounded-md bg-blue-500 px-4 py-2 text-lg font-medium text-gray-800 shadow transition hover:bg-blue-600">
+                                        Read Chapter
+                                    </a>
+                                </div>
+                            </div>
+                        `
+            } catch (error) {
+                document.getElementById('chapter-content').innerHTML = `
+                        <p class="text-red-500">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+    </script>
